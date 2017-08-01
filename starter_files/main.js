@@ -96,21 +96,14 @@ let formData = [
 
 
 // -------- Your Code Goes Below this Line --------
-
-
-
-
-
-
 let itemList = document.querySelector( "#fields" );
 // This makes a loop to go through the array.
   for( let i = 0; i < formData.length; i++ ){
 
 // This creates an input value to act as a space for the value.
-    // let input       = document.createElement( "input" );
-    // input.setAttribute("type", formData[i].type);
 
-// THis alters the type of element based on the type given.
+// This alters the type of element based on the type given.
+// It changes the comment box and language selector types.
     let input = "";
   if (formData[i].type === "select"){
     input = document.createElement("select");
@@ -120,16 +113,30 @@ let itemList = document.querySelector( "#fields" );
     input = document.createElement("input");
   }
 
+// This sets the attributes.
   input.setAttribute("id", formData[i].id);
   input.setAttribute("icon", formData[i].icon);
   input.setAttribute("placeholder", formData[i].label);
+
+// This puts in options if options are available.
+  if (formData[i].options.length !== 0){
+    for (let o = 0; o < formData[i].options.length; o++){
+      let options = document.createElement("option");
+      options.setAttribute("value", formData[i].options[o].value);
+      options.textContent = (formData[i].options[o].label);
+      input.appendChild(options);
+    }
+  }
+
 
 
 // This should create the icon.
     let icon      = document.createElement( "i" );
     icon.setAttribute("class", "fa fa-user");
     icon.setAttribute("aria-hidden", "true");
-
+    // This should make and attach the icon.
+    // input.append( '<i class="fa fa-user" aria-hidden="true"></i>' );
+    input.appendChild( icon );
 
 
 
@@ -147,9 +154,7 @@ let itemList = document.querySelector( "#fields" );
 //     input.appendChild( liH2 );
 // This adds the input to the itemList.
 
-// This should make and attach the icon.
-input.append( '<i class="fa fa-user" aria-hidden="true"></i>' );
-input.appendChild( icon );
+
 
 
     itemList.appendChild( input );
