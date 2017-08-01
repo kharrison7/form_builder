@@ -107,12 +107,28 @@ let itemList = document.querySelector( "#fields" );
   for( let i = 0; i < formData.length; i++ ){
 
 // This creates an input value to act as a space for the value.
-    let input       = document.createElement( "input" );
-    input.setAttribute("type", formData[i].type);
-    input.setAttribute("id", formData[i].id);
-    input.setAttribute("icon", formData[i].icon);
-    input.setAttribute("placeholder", formData[i].label);
+    // let input       = document.createElement( "input" );
+    // input.setAttribute("type", formData[i].type);
 
+// THis alters the type of element based on the type given.
+    let input = "";
+  if (formData[i].type === "select"){
+    input = document.createElement("select");
+  } else if (formData[i].type === "textarea"){
+    input = document.createElement("textarea");
+  } else {
+    input = document.createElement("input");
+  }
+
+  input.setAttribute("id", formData[i].id);
+  input.setAttribute("icon", formData[i].icon);
+  input.setAttribute("placeholder", formData[i].label);
+
+
+// This should create the icon.
+    let icon      = document.createElement( "i" );
+    icon.setAttribute("class", "fa fa-user");
+    icon.setAttribute("aria-hidden", "true");
 
 
 
@@ -130,6 +146,11 @@ let itemList = document.querySelector( "#fields" );
 // // This adds the H2 to the li tile.
 //     input.appendChild( liH2 );
 // This adds the input to the itemList.
+
+// This should make and attach the icon.
+input.append( '<i class="fa fa-user" aria-hidden="true"></i>' );
+input.appendChild( icon );
+
 
     itemList.appendChild( input );
     console.log("appends are made up to "+ i);
